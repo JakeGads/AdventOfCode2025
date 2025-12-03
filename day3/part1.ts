@@ -3,7 +3,7 @@ const filepath = 'data/day3.real';
 
 const data = fs.readFileSync(filepath, 'utf-8').trim().replaceAll('\r', '').split('\n');
 
-class ArrayIndex {
+export class ArrayIndex {
     num: number;
     index: number;
 
