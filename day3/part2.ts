@@ -4,7 +4,6 @@ const filepath = 'data/day3.real';
 
 const data = fs.readFileSync(filepath, 'utf-8').trim().replaceAll('\r', '').split('\n');
 const sampleResults = ["987654321111", "811111111119", "434234234278", "888911112111"]
-// Function to generate the largest possible number by dropping individual chars
 
 export class ArrayIndex {
     num: number;
@@ -19,11 +18,14 @@ export class ArrayIndex {
 function getLargestNumber(digits: number[]){
     // find highest possible digit that maintains 
     let result = '';
+    // countdown to where to find the largest number
     for(let i = 12; i != 0; i--){
         const slice = digits.slice(0, digits.length - i + 1);
         const largest = getLargestSlice(slice);
+        // append results
         result += `${largest.num}`;
         // console.log("Before slice:", digits.toString(), "\tSelected", largest.num);
+        // update digits to remove any skipped digits
         digits = digits.slice(largest.index + 1);
         
     }
@@ -31,16 +33,18 @@ function getLargestNumber(digits: number[]){
 }
 
 function getLargestSlice(array: number[]): ArrayIndex{
+    // using 0 instead of -1 for debugging purposes
     let maxDigit = 0;
     let maxDigitIndex = 0;
     
+    // locate the largest digit and its index 
     for (let i = 0; i < array.length; i++) {
         if (array[i] > maxDigit) {
             maxDigit = array[i];
             maxDigitIndex = i;
         }
     }
-
+    
     return new ArrayIndex(maxDigit, maxDigitIndex);
 }
 
